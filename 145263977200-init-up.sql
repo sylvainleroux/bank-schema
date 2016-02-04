@@ -45,7 +45,7 @@ CREATE TABLE `budget` (
   KEY `YEAR_MONTH` (`year`,`month`),
   KEY `COMPTE` (`compte`),
   KEY `YEAR_MONTH_CATEGO` (`year`,`month`,`catego`)
-) ENGINE=MyISAM AUTO_INCREMENT=1910 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1910 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `budget_backup` (
   `compte` varchar(10) default NULL,
   `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
   KEY `COMPARE` (`year`,`month`,`catego`,`compte`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=COMPRESSED;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPRESSED;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `budget_changes` (
   `prev_value` decimal(15,2) default NULL,
   `new_value` decimal(15,2) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `compte` (
   `courant` tinyint(4) default NULL,
   `description` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `operation` (
   UNIQUE KEY `UNIQUE` (`compte`,`date_operation`,`date_valeur`,`libelle`,`montant`),
   KEY `COMPTE` (`compte`),
   KEY `YEAR_MONTH_CATEGO` (`year`,`month_adjusted`,`catego`)
-) ENGINE=MyISAM AUTO_INCREMENT=3979 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3979 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `operation_backup` (
   `month_bank` int(11) default NULL,
   `month_adjusted` int(11) default NULL,
   `timestamp` timestamp NULL default CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -241,7 +241,7 @@ CREATE VIEW `analysis` AS
 ;
 
 DELIMITER $$
-CREATE DEFINER=`sleroux`@`%` PROCEDURE `get_catego`(IN libelle TEXT)
+CREATE PROCEDURE `get_catego`(IN libelle TEXT)
 BEGIN
 
 	declare i int default 1;
@@ -319,7 +319,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`sleroux`@`%` PROCEDURE `getMonthCredits`(IN in_year INT, IN in_month INT)
+CREATE PROCEDURE `getMonthCredits`(IN in_year INT, IN in_month INT)
 BEGIN
 select T.catego, B.credit from
 (select * from bank.budget where year = in_year and month = in_month and credit > 0 and compte = 'COURANT') B
@@ -336,7 +336,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`sleroux`@`%` PROCEDURE `getMonthDebits`(IN in_year INT, IN in_month INT)
+CREATE PROCEDURE `getMonthDebits`(IN in_year INT, IN in_month INT)
 BEGIN
 select T.catego, B.debit from
 (select * from bank.budget where year = in_year and month = in_month and debit > 0 and compte = 'COURANT') B
