@@ -10,4 +10,5 @@ ADD INDEX `YEAR_MONTH_CATEGO_N` (`year` ASC, `month` ASC, `catego` ASC);
 
 update bank.operation
   set credit = if (montant > 0, montant, 0),
-  debit = if (montant < 0, -montant, 0);
+  debit = if (montant < 0, -montant, 0),
+  month = month_adjusted;
