@@ -190,8 +190,8 @@ CREATE VIEW `diff` AS
             1,
             0) AS `is_credit`
     from
-        (`operation` `O`
-        left join `budget` `B` ON (((`b`.`year` = `o`.`year`)
+        (`operation` `o`
+        left join `budget` `b` ON (((`b`.`year` = `o`.`year`)
             and (`b`.`month` = `o`.`month_adjusted`)
             and (`b`.`catego` = `o`.`catego`))))
     where
@@ -208,8 +208,8 @@ CREATE VIEW `diff` AS
         `b`.`debit` AS `debit`,
         if((`b`.`credit` > 0), 1, 0) AS `is_credit`
     from
-        (`budget` `B`
-        left join `operation` `O` ON (((`b`.`year` = `o`.`year`)
+        (`budget` `b`
+        left join `operation` `o` ON (((`b`.`year` = `o`.`year`)
             and (`b`.`month` = `o`.`month_adjusted`)
             and (`b`.`catego` = `o`.`catego`))))
     where

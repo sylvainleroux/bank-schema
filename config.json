@@ -3,7 +3,7 @@
 
     "username"           : "root",
     "password"           : "",
-    "host"               : "localhost",
+    "host"               : "jenkins-mysql",
     "port"               : 3306,
 
     "revision_db_name"   : "revision",

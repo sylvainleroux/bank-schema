@@ -2,4 +2,4 @@
 -- ref: 145263977200
 
 
-drop database bank;
+drop schema bank;
