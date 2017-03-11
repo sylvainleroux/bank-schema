@@ -5,9 +5,7 @@
 USE `bank`;
 
 CREATE
-     OR REPLACE ALGORITHM = UNDEFINED
-    DEFINER = `sleroux`@`%`
-    SQL SECURITY DEFINER
+     OR REPLACE
 VIEW `bank`.`ops` AS
     SELECT
         `bank`.`operation`.`year` AS `year`,

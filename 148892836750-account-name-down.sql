@@ -4,4 +4,4 @@
 
 
 ALTER TABLE `bank`.`budget`
-CHANGE COLUMN `compte` `compte` VARCHAR(20) NULL DEFAULT NULL ;
+CHANGE COLUMN `compte` `compte` VARCHAR(10) NULL DEFAULT NULL ;
